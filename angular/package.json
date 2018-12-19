@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start-node": "node server.js",
-    "build-prod": "ng build --prod --base-href /atoh-docker/"
+    "build-prod": "ng build --prod --base-href /dist/"
   },
   "private": true,
   "dependencies": {
