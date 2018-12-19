@@ -1,0 +1,17 @@
+{
+  "name": "node-server",
+  "version": "0.0.0",
+  "scripts": {
+    "start-node": "node server.js"
+  },
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "es6-shim": "^0.35.4",
+    "express": "^4.16.4",
+    "express-serve-static-core": "^0.1.1",
+    "moment": "^2.23.0",
+    "path": "^0.12.7",
+    "reflect-metadata": "^0.1.12"
+  }
+}

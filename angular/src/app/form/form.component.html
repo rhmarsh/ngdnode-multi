@@ -1,0 +1,53 @@
+<section class="card">
+    <div class="card-content">
+        <div class="card-title">Promotions</div>
+        <form [formGroup]="details" (ngSubmit)="savePromo()">
+            <div>
+                <input matInput placeholder="Promo ID" formControlName="promoID" required>
+                <mat-error *ngIf="(details.get('promoID')?.hasError('required') || details.get('promoID')?.invalid) && details.get('promoID')?.touched">
+                    Promotion ID is required and must be numeric
+                </mat-error>
+
+                <textarea matInput placeholder="Promo Details" formControlName="promoDesc" required></textarea>
+                <mat-error *ngIf="(details.get('promoDesc')?.hasError('required') || details.get('promoDesc')?.hasError('minlength')) && details.get('promoDesc')?.touched">
+                    Promotion Details is required and must be at least 20 characters
+                </mat-error>
+
+                <mat-radio-group class="radio-column" [formControl]="areaOrZone">
+                    <mat-radio-button class="example-radio-button" value="Patch Area">Patch Area</mat-radio-button>
+                    <mat-radio-button class="example-radio-button" value="Price Zone">Price Zone</mat-radio-button>
+                </mat-radio-group>
+
+                <input matInput placeholder="{{areaOrZone.value}}" formControlName="areaOrZoneDesc" required>
+                <mat-error *ngIf="details.get('areaOrZoneDesc')?.hasError('required') && details.get('areaOrZoneDesc')?.touched">
+                    {{areaOrZone.value}} required
+                </mat-error>
+
+                <input matInput placeholder="Item #" formControlName="itemNbr" required>
+                <mat-error *ngIf="(details.get('itemNbr')?.hasError('required') || details.get('itemNbr')?.invalid) && details.get('itemNbr')?.touched">
+                    Item Number is required and must be numeric
+                </mat-error>
+
+                <input matInput [min]="minDate" [max]="details.value.endDate" [matDatepicker]="startPicker" placeholder="Start Date" formControlName="startDate" style="width:97%">
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker></mat-datepicker>
+                <mat-error *ngIf="details.get('startDate')?.hasError('required') && details.get('startDate')?.touched">
+                    Start Date is required
+                </mat-error>
+
+                <input matInput [min]="details.value.startDate" [matDatepicker]="endPicker" placeholder="End Date" formControlName="endDate" style="width:97%">
+                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <mat-datepicker #endPicker></mat-datepicker>
+                <mat-error *ngIf="details.get('endDate')?.hasError('required') && details.get('endDate')?.touched">
+                    End Date is required
+                </mat-error>
+
+                <mat-error *ngIf="(details.get('startDate')?.touched && details.get('endDate')?.touched) && details.value.startDate >= details.value.endDate">
+                    Start Date must be before the End Date
+                </mat-error>
+            </div>
+            <button class="btn" [disabled]="!details.valid && (details.value.startDate >= details.value.endDate)" [class.disabled]="!details.valid && (details.value.startDate >= details.value.endDate)">Save</button>
+        </form>
+    </div>
+</section>
+
